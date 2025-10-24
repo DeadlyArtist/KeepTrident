@@ -1,0 +1,28 @@
+modLoader = "javafml"
+loaderVersion = "[43,)"
+#issueTrackerURL = ""
+license = "MIT"
+
+[[mods]]
+modId = "keeptrident"
+version = "${version}"
+displayName = "Keep Trident"
+authors = "Deadly Artist"
+description = '''
+${description}
+'''
+logoFile = "icon.png"
+
+[[dependencies.keeptrident]]
+modId = "forge"
+mandatory = true
+versionRange = "[43,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.keeptrident]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.19.2,)"
+ordering = "NONE"
+side = "BOTH"
