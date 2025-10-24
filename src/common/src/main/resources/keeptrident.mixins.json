@@ -6,6 +6,7 @@
   "client": [
   ],
   "mixins": [
+    "TridentEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
