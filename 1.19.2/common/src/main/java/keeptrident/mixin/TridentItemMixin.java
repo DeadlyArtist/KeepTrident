@@ -58,11 +58,11 @@ public class TridentItemMixin {
     public void use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         ItemStack itemStack = user.getStackInHand(hand);
         var result = TypedActionResult.fail(itemStack);
-        if (itemStack.getDamage() >= itemStack.getMaxDamage() - 1 && itemStack.isDamageable()) {
+        if (itemStack.hasNbt() && itemStack.getNbt().contains("thrown")) {
+            // fail
+        } else if (itemStack.getDamage() >= itemStack.getMaxDamage() - 1 && itemStack.isDamageable()) {
             // fail
         } else if (EnchantmentHelper.getRiptide(itemStack) > 0 && !user.isTouchingWaterOrRain()) {
-            // fail
-        } else if (itemStack.hasNbt() && itemStack.getNbt().contains("thrown")) {
             // fail
         } else {
             user.setCurrentHand(hand);

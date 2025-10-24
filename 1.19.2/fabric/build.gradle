@@ -43,13 +43,11 @@ dependencies {
 
 processResources {
     inputs.property 'version', project.version
-    inputs.property 'description', rootProject.mod_description
-    inputs.property 'id', rootProject.mod_id
+    inputs.property 'description', project.mod_description
+    inputs.property 'id', project.mod_id
 
-    filesMatching('META-INF/mods.toml') {
-        expand version: inputs.properties.version
-        expand description: rootProject.mod_description
-        expand id: rootProject.mod_id
+    filesMatching('fabric.mod.json') {
+        expand version: inputs.properties.version, description: inputs.properties.description, id: inputs.properties.id
     }
 }
 

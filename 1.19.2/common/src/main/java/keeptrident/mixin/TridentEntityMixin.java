@@ -53,7 +53,7 @@ public abstract class TridentEntityMixin {
     }
 
     @Inject(method = "onPlayerCollision", at = @At("HEAD"), cancellable = true)
-    private void injectOnPlayerCollision(CallbackInfo ci, @Local PlayerEntity player) {
+    private void injectOnPlayerCollision(PlayerEntity player, CallbackInfo ci) {
         var loyalty = self.getDataTracker().get(TridentEntity.LOYALTY);
         if (!self.world.isClient && (self.inGround || self.isNoClip()) && self.shake <= 0) {
             if (loyalty <= 0 && self.getOwner() != null) {
