@@ -2,6 +2,11 @@ plugins {
     id 'dev.architectury.loom' version '1.11-SNAPSHOT' apply false
     id 'architectury-plugin' version '3.4-SNAPSHOT'
     id 'com.gradleup.shadow' version '8.3.6' apply false
+    id 'io.github.pacifistmc.forgix' version '2.+'
+}
+
+forgix {
+    autoRun = true
 }
 
 architectury {
@@ -41,13 +46,35 @@ subprojects {
         // if it is present.
         // If you remove this line, sources will not be generated.
         withSourcesJar()
-
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
     }
 
     tasks.withType(JavaCompile).configureEach {
-        it.options.release = 17
+        it.options.release = project.java_version as Integer
+    }
+
+
+    processResources {
+        def compatible_forgemc_versions = "${project.compatible_minecraft_versions}".replaceAll("\"", "").replaceAll("]", ",)")
+        var expandProps = ['version'                      : project.version,
+                           'group'                        : project.group,
+                           'minecraft_version'            : project.minecraft_version,
+                           'compatible_minecraft_versions': project.compatible_minecraft_versions,
+                           'compatible_forgemc_versions'  : compatible_forgemc_versions,
+                           'mod_name'                     : project.mod_name,
+                           'mod_authors'                  : project.mod_authors,
+                           'mod_id'                       : project.mod_id,
+                           'license'                      : project.license,
+                           'homepage'                     : project.homepage,
+                           'source'                       : project.source,
+                           'issues'                       : project.issues,
+                           'description'                  : project.description,
+                           'credits'                      : project.credits,
+                           'java_version'                 : project.java_version]
+
+        filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', 'META-INF/neoforge.mods.toml', '*.mixins.json']) {
+            expand expandProps
+        }
+        inputs.properties(expandProps)
     }
 
     // Configure Maven publishing.
