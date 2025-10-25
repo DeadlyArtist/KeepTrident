@@ -28,8 +28,7 @@
   "depends": {
     "fabricloader": "*",
     "minecraft": $compatible_minecraft_versions,
-    "java": ">=${java_version}",
-    "fabric-api": "*"
+    "java": ">=${java_version}"
   },
   "suggests": {
     "another-mod": "*"
