@@ -5,8 +5,11 @@ plugins {
     id 'io.github.pacifistmc.forgix' version '2.+'
 }
 
+rootProject.archives_name = "$rootProject.archives_name-mc$rootProject.minecraft_version"
+
 forgix {
     autoRun = true
+    archiveBaseName = rootProject.archives_name
 }
 
 architectury {

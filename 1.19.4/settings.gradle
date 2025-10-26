@@ -7,7 +7,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "${mod_id}"
+rootProject.name = "${mod_id}-mc${minecraft_version}"
 
 include 'common'
 include 'fabric'

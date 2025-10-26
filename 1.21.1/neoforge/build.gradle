@@ -58,7 +58,7 @@ shadowJar {
 
 remapJar {
     useMixinAP = true;
-    archiveClassifier.set("neoforge")
+//    archiveClassifier.set("neoforge")
     atAccessWideners.add(loom.accessWidenerPath.get().asFile.name)
     inputFile.set shadowJar.archiveFile
 }
