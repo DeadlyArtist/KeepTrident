@@ -1,6 +1,7 @@
 package keeptrident.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import keeptrident.component.KPComponents;
 import net.minecraft.entity.*;
 import net.minecraft.entity.data.TrackedData;
 import net.minecraft.entity.player.PlayerEntity;
@@ -65,10 +66,11 @@ public abstract class TridentEntityMixin {
                 var inventory = player.getInventory();
                 for (DefaultedList<ItemStack> defaultedList : List.of(inventory.main, inventory.offHand)) {
                     for (ItemStack stack : defaultedList) {
-                        if (!stack.isEmpty() && stack.hasNbt()) {
-                            var nbt = stack.getNbt();
-                            if (Objects.equals(nbt.getString("thrown"), self.getUuidAsString())) {
-                                nbt.remove("thrown");
+                        if (!stack.isEmpty() && stack.contains(KPComponents.THROWN)) {
+                            var uuid = stack.get(KPComponents.THROWN);
+                            if (uuid.equals(self.getUuid())) {
+                                stack.remove(KPComponents.THROWN);
+                                stack.remove(KPComponents.THROWN_TICKS);
                             }
                         }
                     }

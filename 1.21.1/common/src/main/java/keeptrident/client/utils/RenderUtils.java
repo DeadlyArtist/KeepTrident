@@ -20,8 +20,6 @@ import net.minecraft.registry.entry.RegistryEntry;
 
 import java.util.List;
 
-import static net.minecraft.item.ShieldItem.getColor;
-
 public class RenderUtils {
     public static void renderGreyOverlay(int x, int y) {
         RenderSystem.disableDepthTest();
@@ -33,13 +31,12 @@ public class RenderUtils {
         float alpha = 0.6f; // Adjust for desired transparency
         int grey = 80; // Adjust for how dark the overlay should be (0 = black, 255 = white)
 
-        BufferBuilder buffer = Tessellator.getInstance().getBuffer();
-        buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
+        BufferBuilder buffer = Tessellator.getInstance().begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
 
-        buffer.vertex(x, y + 16, 200.0).color(grey, grey, grey, (int) (alpha * 255)).next();
-        buffer.vertex(x + 16, y + 16, 200.0).color(grey, grey, grey, (int) (alpha * 255)).next();
-        buffer.vertex(x + 16, y, 200.0).color(grey, grey, grey, (int) (alpha * 255)).next();
-        buffer.vertex(x, y, 200.0).color(grey, grey, grey, (int) (alpha * 255)).next();
+        buffer.vertex(x, y + 16, 200f).color(grey, grey, grey, (int) (alpha * 255));
+        buffer.vertex(x + 16, y + 16, 200f).color(grey, grey, grey, (int) (alpha * 255));
+        buffer.vertex(x + 16, y, 200f).color(grey, grey, grey, (int) (alpha * 255));
+        buffer.vertex(x, y, 200f).color(grey, grey, grey, (int) (alpha * 255));
 
         BufferRenderer.drawWithGlobalProgram(buffer.end());
 

@@ -2,6 +2,7 @@ package keeptrident.mixin;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.llamalad7.mixinextras.sugar.Local;
+import keeptrident.component.KPComponents;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
@@ -35,8 +36,8 @@ public class TridentItemMixin {
     private void injectSetVelocity(ItemStack stack, World world, LivingEntity user, int remainingUseTicks, CallbackInfo ci, @Local PlayerEntity player, @Local TridentEntity tridentEntity) {
         var loyalty = EnchantmentHelper.getLoyalty(stack);
         if (loyalty > 0) {
-            stack.setSubNbt("thrown", NbtHelper.fromUuid(tridentEntity.getUuid()));
-            stack.setSubNbt("thrown_ticks", NbtInt.of(0));
+            stack.set(KPComponents.THROWN, tridentEntity.getUuid());
+            stack.set(KPComponents.THROWN_TICKS, 0);
         }
     }
 
@@ -58,7 +59,7 @@ public class TridentItemMixin {
     public void use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         ItemStack itemStack = user.getStackInHand(hand);
         var result = TypedActionResult.fail(itemStack);
-        if (itemStack.hasNbt() && itemStack.getNbt().contains("thrown")) {
+        if (itemStack.contains(KPComponents.THROWN)) {
             // fail
         } else if (itemStack.getDamage() >= itemStack.getMaxDamage() - 1 && itemStack.isDamageable()) {
             // fail

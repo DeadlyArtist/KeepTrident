@@ -3,7 +3,7 @@ Minecraft mod to make loyalty tridents stay in the inventory when thrown. Say no
 
 ## Versions
 Loaders: Fabric, Forge, Neoforge
-Minecraft: 1.18.2 to 1.21.9
+Minecraft: 1.18.2 to 1.21.1
 
 ## License
 This mod is licensed under MIT license.

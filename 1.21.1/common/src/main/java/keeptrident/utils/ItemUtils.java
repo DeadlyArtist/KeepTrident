@@ -19,11 +19,11 @@ public class ItemUtils {
     }
 
     public static Item byId(String id) {
-        return byId(new Identifier(id));
+        return byId(Identifier.of(id));
     }
 
     public static Item byId(String namespace, String path) {
-        return byId(new Identifier(namespace, path));
+        return byId(Identifier.of(namespace, path));
     }
 
     public static Identifier getId(Item item) {

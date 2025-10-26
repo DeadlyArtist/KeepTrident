@@ -3,6 +3,7 @@ package keeptrident.mixin;
 import com.llamalad7.mixinextras.injector.ModifyExpressionValue;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalFloatRef;
+import keeptrident.component.KPComponents;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
@@ -27,7 +28,7 @@ public class PlayerEntityMixin {
     @Inject(at = @At(value = "HEAD"), method = "tick")
     private void tick(CallbackInfo ci) {
         var mainHand = self.getMainHandStack();
-        if (mainHand.getItem() instanceof TridentItem && mainHand.hasNbt() && mainHand.getNbt().contains("thrown")) {
+        if (mainHand.getItem() instanceof TridentItem && mainHand.contains(KPComponents.THROWN)) {
             self.resetLastAttackedTicks();
         }
     }
@@ -36,7 +37,7 @@ public class PlayerEntityMixin {
     @Inject(method = "attack", at = @At("HEAD"), cancellable = true)
     private void injectAttack(Entity target, CallbackInfo ci) {
         var mainHand = self.getMainHandStack();
-        if (mainHand.getItem() instanceof TridentItem && mainHand.hasNbt() && mainHand.getNbt().contains("thrown"))
+        if (mainHand.getItem() instanceof TridentItem && mainHand.contains(KPComponents.THROWN))
             ci.cancel();
     }
 }

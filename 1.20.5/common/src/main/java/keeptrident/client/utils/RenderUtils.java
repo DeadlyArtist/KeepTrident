@@ -20,8 +20,6 @@ import net.minecraft.registry.entry.RegistryEntry;
 
 import java.util.List;
 
-import static net.minecraft.item.ShieldItem.getColor;
-
 public class RenderUtils {
     public static void renderGreyOverlay(int x, int y) {
         RenderSystem.disableDepthTest();

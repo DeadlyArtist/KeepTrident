@@ -13,5 +13,6 @@ public final class KPTridentFabric implements ModInitializer {
 
         // Run our common setup.
         KPTrident.init();
+        RegistryInitManagerFabric.init();
     }
 }

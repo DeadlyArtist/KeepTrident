@@ -2,6 +2,7 @@ package keeptrident.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import keeptrident.client.utils.RenderUtils;
+import keeptrident.component.KPComponents;
 import net.minecraft.client.render.*;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.render.model.BakedModel;
@@ -23,7 +24,7 @@ public abstract class ItemRendererMixin {
     @Inject(method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V", at = @At(value = "HEAD"), cancellable = true)
     public void injectRenderItem(ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, CallbackInfo ci) {
         boolean bl = renderMode == ModelTransformationMode.GUI || renderMode == ModelTransformationMode.GROUND || renderMode == ModelTransformationMode.FIXED;
-        if (!bl && stack.getItem() instanceof TridentItem && stack.hasNbt() && stack.getNbt().contains("thrown")) {
+        if (!bl && stack.getItem() instanceof TridentItem && stack.contains(KPComponents.THROWN)) {
             ci.cancel();
             return;
         }
