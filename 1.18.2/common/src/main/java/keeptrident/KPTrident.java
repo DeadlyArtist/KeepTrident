@@ -1,6 +1,6 @@
 package keeptrident;
 
-public final class ExampleMod {
+public final class KPTrident {
     public static final String MOD_ID = "keeptrident";
 
     public static void init() {
