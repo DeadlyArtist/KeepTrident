@@ -17,26 +17,29 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DyeColor;
 import net.minecraft.util.Identifier;
 import net.minecraft.registry.entry.RegistryEntry;
+import org.joml.Matrix4f;
 
 import java.util.List;
 
 public class RenderUtils {
-    public static void renderGreyOverlay(int x, int y) {
+    public static void renderGreyOverlay(MatrixStack matrices, int x, int y) {
         RenderSystem.disableDepthTest();
         RenderSystem.enableBlend();
         RenderSystem.defaultBlendFunc();
         RenderSystem.setShader(GameRenderer::getPositionColorProgram);
 
-        // Setting overlay color (semi-transparent black/grey)
-        float alpha = 0.6f; // Adjust for desired transparency
-        int grey = 80; // Adjust for how dark the overlay should be (0 = black, 255 = white)
+        float alpha = 0.6f;
+        int grey = 80;
+        int a = (int) (alpha * 255);
+
+        var matrix = matrices.peek().getPositionMatrix();
 
         BufferBuilder buffer = Tessellator.getInstance().begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_COLOR);
 
-        buffer.vertex(x, y + 16, 200f).color(grey, grey, grey, (int) (alpha * 255));
-        buffer.vertex(x + 16, y + 16, 200f).color(grey, grey, grey, (int) (alpha * 255));
-        buffer.vertex(x + 16, y, 200f).color(grey, grey, grey, (int) (alpha * 255));
-        buffer.vertex(x, y, 200f).color(grey, grey, grey, (int) (alpha * 255));
+        buffer.vertex(matrix, x, y + 16, 200f).color(grey, grey, grey, a);
+        buffer.vertex(matrix, x + 16, y + 16, 200f).color(grey, grey, grey, a);
+        buffer.vertex(matrix, x + 16, y, 200f).color(grey, grey, grey, a);
+        buffer.vertex(matrix, x, y, 200f).color(grey, grey, grey, a);
 
         BufferRenderer.drawWithGlobalProgram(buffer.end());
 
