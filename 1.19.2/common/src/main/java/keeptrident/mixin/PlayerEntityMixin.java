@@ -27,7 +27,7 @@ public class PlayerEntityMixin {
     @Inject(at = @At(value = "HEAD"), method = "tick")
     private void tick(CallbackInfo ci) {
         var mainHand = self.getMainHandStack();
-        if (mainHand.getItem() instanceof TridentItem && mainHand.hasNbt() && mainHand.getNbt().contains("thrown")) {
+        if (mainHand.hasNbt() && mainHand.getNbt().contains("trident_thrown")) {
             self.resetLastAttackedTicks();
         }
     }
@@ -36,7 +36,7 @@ public class PlayerEntityMixin {
     @Inject(method = "attack", at = @At("HEAD"), cancellable = true)
     private void injectAttack(Entity target, CallbackInfo ci) {
         var mainHand = self.getMainHandStack();
-        if (mainHand.getItem() instanceof TridentItem && mainHand.hasNbt() && mainHand.getNbt().contains("thrown"))
+        if (mainHand.hasNbt() && mainHand.getNbt().contains("trident_thrown"))
             ci.cancel();
     }
 }

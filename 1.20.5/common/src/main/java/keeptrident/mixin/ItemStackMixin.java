@@ -20,7 +20,7 @@ public class ItemStackMixin {
     @Inject(method = "inventoryTick", at = @At("HEAD"))
     private void inventoryTick(World world, Entity entity, int slot, boolean selected, CallbackInfo ci) {
         var item = self.getItem();
-        if (item instanceof TridentItem && world instanceof ServerWorld serverWorld && self.contains(KPComponents.THROWN)) {
+        if (world instanceof ServerWorld serverWorld && self.contains(KPComponents.THROWN)) {
             var thrownUuid = self.get(KPComponents.THROWN);
             var thrown = serverWorld.getEntity(thrownUuid);
             if (thrown == null) {

@@ -58,18 +58,8 @@ public class TridentItemMixin {
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     public void use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         ItemStack itemStack = user.getStackInHand(hand);
-        var result = TypedActionResult.fail(itemStack);
         if (itemStack.contains(KPComponents.THROWN)) {
-            // fail
-        } else if (itemStack.getDamage() >= itemStack.getMaxDamage() - 1 && itemStack.isDamageable()) {
-            // fail
-        } else if (EnchantmentHelper.getRiptide(itemStack) > 0 && !user.isTouchingWaterOrRain()) {
-            // fail
-        } else {
-            user.setCurrentHand(hand);
-            result = TypedActionResult.consume(itemStack);
+            cir.setReturnValue(TypedActionResult.fail(itemStack));
         }
-
-        cir.setReturnValue(result);
     }
 }

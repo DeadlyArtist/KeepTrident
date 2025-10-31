@@ -49,6 +49,9 @@ dependencies {
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionNeoForge')
+
+    // Compat
+    modImplementation("curse.maven:upgradablecrystaltools-561870:7047318")
 }
 
 shadowJar {

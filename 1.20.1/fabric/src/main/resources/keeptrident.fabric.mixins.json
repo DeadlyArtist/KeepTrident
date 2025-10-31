@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "keeptrident.fabric.mixin",
+  "plugin": "keeptrident.fabric.MixinPluginFabric",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

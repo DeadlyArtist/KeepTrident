@@ -6,4 +6,8 @@ public final class KPTrident {
     public static void init() {
         // Write common init code here.
     }
+
+    public static void preInitialize() {
+
+    }
 }

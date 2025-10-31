@@ -28,7 +28,7 @@ public class DrawContextMixin {
 
     @Inject(method = "drawItem(Lnet/minecraft/entity/LivingEntity;Lnet/minecraft/world/World;Lnet/minecraft/item/ItemStack;IIII)V", at = @At("TAIL"))
     private void injectGreyOverlay(LivingEntity entity, World world, ItemStack stack, int x, int y, int seed, int z, CallbackInfo ci) {
-        if (stack.getItem() instanceof TridentItem && stack.hasNbt() && stack.getNbt().contains("thrown")) {
+        if (stack.hasNbt() && stack.getNbt().contains("trident_thrown")) {
             var matrices = drawContext.getMatrices();
             RenderUtils.renderGreyOverlay(matrices, x, y);
         }

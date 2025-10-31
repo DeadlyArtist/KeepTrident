@@ -10,4 +10,8 @@ public final class KPTrident {
 
         KPComponents.init();
     }
+
+    public static void preInitialize() {
+
+    }
 }

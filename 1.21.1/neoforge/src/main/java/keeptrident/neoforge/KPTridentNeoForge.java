@@ -1,5 +1,7 @@
 package keeptrident.neoforge;
 
+import keeptrident.neoforge.utils.LoaderImpl;
+import keeptrident.utils.Loader;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
@@ -18,6 +20,10 @@ public final class KPTridentNeoForge {
 
         eventBus.addListener(this::setup);
         RegistryInitManagerNeo.register(eventBus);
+    }
+
+    public static void preInitialize() {
+        Loader._impl = new LoaderImpl();
     }
 
     public void setup(final FMLCommonSetupEvent event) {

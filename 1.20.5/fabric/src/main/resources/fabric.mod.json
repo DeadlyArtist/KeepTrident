@@ -23,7 +23,8 @@
     ]
   },
   "mixins": [
-    "keeptrident.mixins.json"
+    "keeptrident.mixins.json",
+    "keeptrident.fabric.mixins.json"
   ],
   "depends": {
     "fabricloader": "*",

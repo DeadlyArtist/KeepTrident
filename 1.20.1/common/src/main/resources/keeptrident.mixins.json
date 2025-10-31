@@ -1,6 +1,7 @@
 {
   "required": true,
   "package": "keeptrident.mixin",
+  "plugin": "keeptrident.MixinPlugin",
   "compatibilityLevel": "JAVA_17",
   "minVersion": "0.8",
   "client": [

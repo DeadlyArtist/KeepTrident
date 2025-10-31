@@ -1,5 +1,7 @@
 package keeptrident.fabric;
 
+import keeptrident.fabric.utils.LoaderImpl;
+import keeptrident.utils.Loader;
 import net.fabricmc.api.ModInitializer;
 
 import keeptrident.KPTrident;
@@ -13,5 +15,9 @@ public final class KPTridentFabric implements ModInitializer {
 
         // Run our common setup.
         KPTrident.init();
+    }
+
+    public static void preInitialize() {
+        Loader._impl = new LoaderImpl();
     }
 }

@@ -13,7 +13,7 @@ loom {
     forge {
         convertAccessWideners = true
 
-        mixinConfig "keeptrident.mixins.json"
+        mixinConfig "${project.mod_id}.mixins.json", "${project.mod_id}.forge.mixins.json"
     }
 }
 

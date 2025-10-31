@@ -67,8 +67,8 @@ public abstract class TridentEntityMixin {
                     for (ItemStack stack : defaultedList) {
                         if (!stack.isEmpty() && stack.hasNbt()) {
                             var nbt = stack.getNbt();
-                            if (Objects.equals(nbt.getString("thrown"), self.getUuidAsString())) {
-                                nbt.remove("thrown");
+                            if (Objects.equals(nbt.getString("trident_thrown"), self.getUuidAsString())) {
+                                nbt.remove("trident_thrown");
                             }
                         }
                     }

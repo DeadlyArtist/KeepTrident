@@ -13,7 +13,7 @@ loom {
     forge {
         convertAccessWideners = true
 
-        mixinConfig "keeptrident.mixins.json"
+        mixinConfig "${project.mod_id}.mixins.json", "${project.mod_id}.forge.mixins.json"
     }
 }
 
@@ -44,6 +44,9 @@ dependencies {
 
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionForge')
+
+    // Compat
+    modImplementation("curse.maven:upgradablecrystaltools-561870:5722507")
 }
 
 shadowJar {

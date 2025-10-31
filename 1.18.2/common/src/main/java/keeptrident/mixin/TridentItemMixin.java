@@ -35,8 +35,8 @@ public class TridentItemMixin {
     private void injectSetVelocity(ItemStack stack, World world, LivingEntity user, int remainingUseTicks, CallbackInfo ci, @Local PlayerEntity player, @Local TridentEntity tridentEntity) {
         var loyalty = EnchantmentHelper.getLoyalty(stack);
         if (loyalty > 0) {
-            stack.setSubNbt("thrown", NbtHelper.fromUuid(tridentEntity.getUuid()));
-            stack.setSubNbt("thrown_ticks", NbtInt.of(0));
+            stack.setSubNbt("trident_thrown", NbtHelper.fromUuid(tridentEntity.getUuid()));
+            stack.setSubNbt("trident_thrown_ticks", NbtInt.of(0));
         }
     }
 
@@ -58,17 +58,8 @@ public class TridentItemMixin {
     public void use(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         ItemStack itemStack = user.getStackInHand(hand);
         var result = TypedActionResult.fail(itemStack);
-        if (itemStack.hasNbt() && itemStack.getNbt().contains("thrown")) {
-            // fail
-        } else if (itemStack.getDamage() >= itemStack.getMaxDamage() - 1 && itemStack.isDamageable()) {
-            // fail
-        } else if (EnchantmentHelper.getRiptide(itemStack) > 0 && !user.isTouchingWaterOrRain()) {
-            // fail
-        } else {
-            user.setCurrentHand(hand);
-            result = TypedActionResult.consume(itemStack);
+        if (itemStack.hasNbt() && itemStack.getNbt().contains("trident_thrown")) {
+            cir.setReturnValue(TypedActionResult.fail(itemStack));
         }
-
-        cir.setReturnValue(result);
     }
 }

@@ -1,0 +1,16 @@
+{
+  "required": true,
+  "package": "keeptrident.forge.mixin",
+  "plugin": "keeptrident.forge.MixinPluginForge",
+  "compatibilityLevel": "JAVA_17",
+  "minVersion": "0.8",
+  "client": [
+  ],
+  "mixins": [
+    "compat.upgradablecrystaltools.CrystalTridentEntityMixin",
+    "compat.upgradablecrystaltools.CrystalTridentMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

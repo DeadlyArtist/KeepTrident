@@ -27,7 +27,7 @@ public abstract class ItemRendererMixin {
     @Inject(method = "renderItem(Lnet/minecraft/item/ItemStack;Lnet/minecraft/client/render/model/json/ModelTransformationMode;ZLnet/minecraft/client/util/math/MatrixStack;Lnet/minecraft/client/render/VertexConsumerProvider;IILnet/minecraft/client/render/model/BakedModel;)V", at = @At(value = "HEAD"), cancellable = true)
     public void injectRenderItem(ItemStack stack, ModelTransformationMode renderMode, boolean leftHanded, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, int overlay, BakedModel model, CallbackInfo ci) {
         boolean bl = renderMode == ModelTransformationMode.GUI || renderMode == ModelTransformationMode.GROUND || renderMode == ModelTransformationMode.FIXED;
-        if (!bl && stack.getItem() instanceof TridentItem && stack.hasNbt() && stack.getNbt().contains("thrown")) {
+        if (!bl && stack.hasNbt() && stack.getNbt().contains("trident_thrown")) {
             ci.cancel();
             return;
         }
@@ -35,7 +35,7 @@ public abstract class ItemRendererMixin {
 
     @Inject(method = "renderGuiItemModel", at = @At("TAIL"))
     private void injectGreyOverlay(MatrixStack matrices, ItemStack stack, int x, int y, BakedModel model, CallbackInfo ci) {
-        if (stack.getItem() instanceof TridentItem && stack.hasNbt() && stack.getNbt().contains("thrown")) {
+        if (stack.hasNbt() && stack.getNbt().contains("trident_thrown")) {
             RenderUtils.renderGreyOverlay(matrices, x, y);
         }
     }
